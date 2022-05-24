@@ -124,6 +124,8 @@ db.create_all()
 
 def format_datetime(value, format='medium'):
     # date = dateutil.parser.parse(value)
+
+    # stackoverflow
     if isinstance(value, str):
         date = dateutil.parser.parse(value)
     else:
@@ -219,7 +221,6 @@ def show_venue(venue_id):
             "artist_image_link": show.artist.image_link,
             "start_time": show.start_time.strftime('%Y-%m-%d %H:%M:%S')
         })
-    # print(venue.genres.split(' '))
     if venue.genres is not None:
         venue.genres = venue.genres.split(',')
     else:
@@ -270,7 +271,7 @@ def create_venue_submission():
     except:
         db.session.rollback()
         flash('An error occurred. Venue ' +
-              form.data.name + ' could not be listed.')
+              form.name.data + ' could not be listed.')
     finally:
         db.session.close()
 
